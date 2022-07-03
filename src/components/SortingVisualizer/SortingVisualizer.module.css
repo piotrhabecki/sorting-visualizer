@@ -1,32 +1,21 @@
 .sorting__app {
-    display: grid;
-    grid-template-columns: 2;
-  }
-  
-  .array__container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: flex-end;
-    align-content: stretch;
-    height: 90vh;
-  }
-  
-  .array__button {
-    width: 150px;
-    height: 20px;
-  }
-  
-  .controler__container {
-      display: flex;
-      justify-content: center;
-  }
-  
-  .array__bar {
-    width: 100px;
-    display: inline-block;
-    border: 1px solid;
-    color: black;
-  }
-  
+  display: grid;
+  grid-template-columns: 2;
+}
+
+.array__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: stretch;
+  height: 90vh;
+}
+
+.array__bar {
+  width: 10px;
+  display: inline-block;
+  border: 1px solid;
+  color: black;
+}

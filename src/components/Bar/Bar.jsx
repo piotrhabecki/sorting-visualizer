@@ -7,7 +7,7 @@ const Bar = (props) => {
         id={props.index}
         style={{ height: `${props.height}px`, backgroundColor: `${props.color}` }}
         className={classes.array__bar}
-      >index: {props.index} value: {props.height}</div>
+      ></div>
     );
 };
 

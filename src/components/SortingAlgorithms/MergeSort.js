@@ -1,3 +1,5 @@
+import { STANDARD_COLOR, RED_COLOR } from "../utils/const";
+
 export function* mergeSort(arr, i = 0, j = arr.length - 1) {
   const middle = Math.floor((j - i) / 2) + i;
 
@@ -30,14 +32,14 @@ export function* merge(arr, i, middle, j) {
 
   while (left <= middle && right <= j) {
     if (arr[left].value <= arr[right].value) {
-      arr[left].color = "#FF7F50";
-      arr[right].color = "#FF7F50";
+      arr[left].color = RED_COLOR;
+      arr[right].color = RED_COLOR;
       yield {
         result: arr,
       };
 
-      arr[left].color = "#d3c0ff";
-      arr[right].color = "#d3c0ff";
+      arr[left].color = STANDARD_COLOR;
+      arr[right].color = STANDARD_COLOR;
 
       yield* push(left);
       left++;
@@ -46,14 +48,14 @@ export function* merge(arr, i, middle, j) {
         result: arr,
       };
     } else {
-      arr[left].color = "#FF7F50";
-      arr[right].color = "#FF7F50";
+      arr[left].color = RED_COLOR;
+      arr[right].color = RED_COLOR;
       yield {
         result: arr,
       };
 
-      arr[left].color = "#d3c0ff";
-      arr[right].color = "#d3c0ff";
+      arr[left].color = STANDARD_COLOR;
+      arr[right].color = STANDARD_COLOR;
 
       yield* push(right);
       right++;
@@ -64,10 +66,26 @@ export function* merge(arr, i, middle, j) {
     }
   }
   while (left <= middle) {
+    arr[left].color = RED_COLOR;
+    arr[middle].color = RED_COLOR;
+    yield {
+      result: arr,
+    };
+
+    arr[left].color = STANDARD_COLOR;
+    arr[middle].color = STANDARD_COLOR;
     yield* push(left);
     left++;
   }
   while (right <= j) {
+    arr[right].color = RED_COLOR;
+    arr[j].color = RED_COLOR;
+    yield {
+      result: arr,
+    };
+
+    arr[right].color = STANDARD_COLOR;
+    arr[j].color = STANDARD_COLOR;
     yield* push(right);
     right++;
   }

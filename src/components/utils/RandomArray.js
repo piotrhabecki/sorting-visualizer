@@ -1,3 +1,5 @@
+import { STANDARD_COLOR } from "./const";
+
 export const randomArray = (length, min, max) => {
     let i = -1;
     const array = [...new Array(length)].map(() => {
@@ -6,7 +8,7 @@ export const randomArray = (length, min, max) => {
         value: Math.round(Math.random() * (max - min + 1) + min),
         index: i,
         key: i,
-        color: "#d3c0ff",
+        color: STANDARD_COLOR,
       };
     });
 

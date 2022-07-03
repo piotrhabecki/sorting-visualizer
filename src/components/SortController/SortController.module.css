@@ -1,0 +1,21 @@
+.sort__controller__container {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.sort__controller__controllers {
+    display: flex;
+    justify-content: center;
+}
+
+.sort__controller__timer {
+    display: flex;
+    justify-content: center;
+    height: 5rem;
+}
+
+.sort__controller__sortinfo {
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
