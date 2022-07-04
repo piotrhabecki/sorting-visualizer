@@ -1,61 +1,72 @@
+import { useState, useEffect, useRef } from "react";
+import { useRafLoop } from "react-use";
+
 import { bubbleSort } from "../SortingAlgorithms/BubbleSort";
 import { mergeSort } from "../SortingAlgorithms/MergeSort";
-import { useState, useEffect, useRef, useCallback } from "react";
-import { useRafLoop } from "react-use";
-import { randomArray } from "../utils/RandomArray";
+import { quickSort } from "../SortingAlgorithms/QuickSort";
+import { selectionSort } from "../SortingAlgorithms/SelectionSort";
+
 import Bar from "../Bar/Bar";
 import { Card } from "@blueprintjs/core";
-import classes from "./SortingVisualizer.module.css";
 import SortController from "../SortController/SortController";
+
+import useGetMaxElements from "../Hooks/UseGetMaxElements";
+import { randomArray } from "../utils/RandomArray";
 import { ALGORITHMS } from "../utils/const";
 
+import classes from "./SortingVisualizer.module.css";
+
 const SortingVisualizer = () => {
-  const [quantity, setQuantity] = useState(100);
+  const [quantity, setQuantity] = useState(useGetMaxElements());
   const [result, setResult] = useState(randomArray(quantity, 5, 500));
   const [timer, setTimer] = useState(30);
   const [generator, setGenerator] = useState(bubbleSort(result));
   const [selected, setSelected] = useState(ALGORITHMS.BubbleSort);
-  const [sortingState, setSortingState] = useState(null);
+  const [sortingState, setSortingState] = useState();
   const [sorting, setSorting] = useState(false);
-
-
-
-  const step = () => {
-    if (sorting) {
-      setSortingState(generator.next());
-      return;
-    }
-    if (result) {
-      setResult(result);
-      setSorting(false);
-      setSortingState(null)
-      return;
-    }
-  };
 
   const lastCalled = useRef(0);
   const delta = useRef(30);
 
+  const step = () => {
+    if (!sortingState?.done) {
+      setSortingState(generator.next());
+      console.log(sortingState);
+      return;
+    }
+    if (sortingState.done) {
+      setResult(result);
+      return;
+    }
+  };
+
   const [loopStop, loopStart] = useRafLoop((time) => {
-    if (time - lastCalled.current > delta.current) {
+    if (time - lastCalled.current > delta.current && !sortingState?.done) {
       step();
       lastCalled.current = time;
     }
-    if (result && !sorting) {
+    if (sortingState?.done === true) {
+      setSorting(false);
       return;
     }
   });
 
-  const onAlgoSelect = (name) => {
+  const onAlgoSelect = (name, array = result) => {
     switch (name) {
       case ALGORITHMS.BubbleSort:
-        setBubbleSort();
+        setBubbleSort(array);
         break;
       case ALGORITHMS.MergeSort:
-        setMergeSort();
+        setMergeSort(array);
+        break;
+      case ALGORITHMS.QuickSort:
+        setQuickSort(array);
+        break;
+      case ALGORITHMS.SelectionSort:
+        setSelectionSort(array);
         break;
       default:
-      // code block
+        break;
     }
   };
 
@@ -70,31 +81,37 @@ const SortingVisualizer = () => {
     }
   }, [loopStop, loopStart, sorting, timer]);
 
-  const setBubbleSort = () => {
-    setSelected(ALGORITHMS.BubbleSort);
-    setGenerator(bubbleSort(result));
-  };
-
-  const setMergeSort = () => {
-    setSelected(ALGORITHMS.MergeSort);
-    setGenerator(mergeSort(result));
-  };
-
-  const handleGenerateNewArray = () => {
-    setResult(randomArray(quantity, 5, 500));
+  const reset = (array) => {
+    setResult(array);
     setSorting(false);
-    onAlgoSelect(selected);
+    onAlgoSelect(selected, array);
   };
+
+  const setAlgorithm = (algorithmFuncion, algorithmDescription) => {
+    const newGenerator = algorithmFuncion;
+    setGenerator(newGenerator);
+    setSortingState(null);
+    setSelected(algorithmDescription);
+  };
+
+  const setBubbleSort = (array) =>
+    setAlgorithm(bubbleSort(array), ALGORITHMS.BubbleSort);
+  const setMergeSort = (array) =>
+    setAlgorithm(mergeSort(array), ALGORITHMS.MergeSort);
+  const setQuickSort = (array) =>
+    setAlgorithm(quickSort(array), ALGORITHMS.QuickSort);
+  const setSelectionSort = (array) =>
+    setAlgorithm(selectionSort(array), ALGORITHMS.SelectionSort);
+
+  const handleGenerateNewArray = () => reset(randomArray(quantity, 5, 500));
 
   const onSetQuantity = (value) => {
     setQuantity(value);
-    setResult(randomArray(value, 5, 500));
-    setSorting(false);
+    reset(randomArray(value, 5, 500));
   };
 
   return (
     <div>
-      {/* <button onClick={step}>Next step</button> */}
       <div className={classes.sorting__app}>
         <SortController
           selectAlgo={onAlgoSelect}

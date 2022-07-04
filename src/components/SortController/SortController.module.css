@@ -11,7 +11,6 @@
 .sort__controller__timer {
     display: flex;
     justify-content: center;
-    height: 5rem;
 }
 
 .sort__controller__sortinfo {
@@ -19,3 +18,13 @@
     justify-content: center;
     height: auto;
 }
+
+/* ================ MEDIA QUERIES (SMALL DEVICES) ================== */
+
+@media screen and (max-width: 1024px) {
+    .sort__controller__container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+  }
+  
