@@ -1,6 +1,6 @@
 {
   "name": "sorting-visualizer",
-  "homepage": "https://piotrhabecki.github.io/SortVisualizerDemoApp",
+  "homepage": "https://piotrhabecki.github.io/sorting-visualizer/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
