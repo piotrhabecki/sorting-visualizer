@@ -139,6 +139,7 @@ const SortingVisualizer = () => {
           </Card>
         </div>
       </div>
+      <a href="https://testquest.vercel.app/" className={classes.about__page}>Test Quest</a>
     </div>
   );
 };

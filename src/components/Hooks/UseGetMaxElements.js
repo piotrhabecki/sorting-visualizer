@@ -8,7 +8,7 @@ function getMaxElementsDimensions() {
   if (width <= 768) {
     return 70;
   }
-  else return 180
+  else return 160
 }
 
 export default function useGetMaxElements() {

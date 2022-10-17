@@ -21,11 +21,31 @@
   transition: all 40ms linear;
 }
 
+.about__page {
+  color: blue;
+  position: absolute;
+  right: -1rem;
+  bottom: 5rem;
+  transform: rotate(-90deg);
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
 /* ================ MEDIA QUERIES (SMALL DEVICES) ================== */
 
 @media screen and (max-width: 1024px) {
   .sorting__app {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
+  }
+
+  .about__page {
+    position: sticky;
+    top: 100vh;
+    padding-left: 40vw;
+    padding-bottom: 10px;
+    transform: rotate(0deg);
+    font-weight: 400;
+    font-size: 1.2rem;
   }
 }
