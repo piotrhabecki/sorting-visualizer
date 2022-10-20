@@ -16,7 +16,7 @@ The application is using <a target="_blank" href="https://developer.mozilla.org/
 ## Live demo and manual
 <div align="center">
 
-<a target="_blank" href="https://piotrhabecki.github.io/sorting-visualizer/">Live demo</a>
+<h3><a target="_blank" href="https://piotrhabecki.github.io/sorting-visualizer/">Live demo</a><h3>
 
 </div>
 
