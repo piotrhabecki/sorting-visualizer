@@ -34,6 +34,8 @@ If you are running the app in the phone browser then the number of elements will
 
 * Each reshuffle action is highlighted.
 
+📱 It is responsive, you can run it on your phone as well 📱
+
 ## How to run it on your machine
 
 If you want to run the code you just have to:
